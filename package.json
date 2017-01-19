@@ -1,7 +1,7 @@
 {
   "name": "nodetest",
   "version": "1.0.0",
-  "description": "Locmote - Node Test",
+  "description": "Locomote - Node Test",
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel open:src open:back lint:watch",
@@ -13,7 +13,17 @@
     "lint": "esw webpack.config.* src tools --color",
     "lint:watch": "npm run lint -- --watch"
   },
-  "devDependencies":{
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caritosteph/node.locomote.test.git"
+  },
+  "author": "Carolyn Ulfe",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
+  },
+  "devDependencies": {
     "babel-cli": "6.18.0",
     "babel-core": "6.20.0",
     "babel-eslint": "7.1.1",
@@ -36,15 +46,5 @@
     "webpack-dev-middleware": "1.9.0",
     "webpack-hot-middleware": "2.13.2",
     "webpack-md5-hash": "0.0.5"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/caritosteph/node.locomote.test.git"
-  },
-  "author": "Carolyn Ulfe",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/caritosteph/node.locomote.test/issues"
-  },
-  "homepage": "https://github.com/caritosteph/node.locomote.test#readme"
+  }
 }
