@@ -16,10 +16,7 @@ browserSync({
 
     middleware: [
       webpackDevMiddleware(bundler, {
-        // Dev middleware can't access config, so we provide publicPath
         publicPath: config.output.publicPath,
-
-        //only errors are displayed to the console.
         noInfo: false,
         quiet: false,
         stats: {

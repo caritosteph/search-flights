@@ -9,10 +9,6 @@
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true,
-      "experimentalObjectRestSpread": true
-    }
   },
   "env": {
     "es6": true,
@@ -33,7 +29,5 @@
     "no-alert": 0,
     "no-lone-blocks": 0,
     "import/extensions": 1
-  },
-  "globals": {
   }
 }
