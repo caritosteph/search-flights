@@ -27,4 +27,17 @@ app.get('/airports', function(req,res){
     });
 });
 
+app.get('/flight_search/:airline_code', function(req,res){
+    let airline_code = req.params.airline_code;
+    let date = req.query.date;
+    let from = req.query.from;
+    let to = req.query.to;
+    let query = {date:date, from:from, to:to};
+    request.get({baseUrl:base_url, url:'/flight_search/'+airline_code, qs:query},function(error,response,body){
+      if(!error && response.statusCode == 200){
+        res.send(JSON.parse(body));
+      }
+    });
+});
+
 app.listen(3002);
