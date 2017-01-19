@@ -13,6 +13,7 @@ app.use(function(req, res, next) {
 app.get('/airlines',function(req,res){
   request.get(base_url+'airlines', function(error, response, body){
     if(!error && response.statusCode == 200){
+      res.setHeader('Content-Type', 'application/json');
       res.send(JSON.parse(body));
     }
   });
