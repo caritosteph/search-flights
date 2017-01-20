@@ -7,7 +7,56 @@
   <title>Locomote - Node Test</title>
 </head>
 <body>
-  <p>Hello World!</p>
-  <button type="button" name="button" class="btn btn-danger">Search</button>
+  <header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Flight Search</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="search">
+    <div class="container">
+      <div class="row">
+        <form class="col-md-6 col-md-offset-3">
+          <div class="form-group">
+            <label for="from">From location</label>
+            <input type="text" name="from" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="to">To location</label>
+            <input type="text" name="to" class="form-control">
+          </div>
+          <div class="form-group" id="travel-date">
+            <label for="to">Travel date</label>
+            <input type="text" class="form-control">
+          </div>
+          <button type="button" name="search" class="btn btn-primary">search</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section>
+  </section>
+
+  <footer>
+  </footer>
+
 </body>
 </html>
