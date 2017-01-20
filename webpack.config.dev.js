@@ -19,9 +19,9 @@ export default {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      JQuery: "jquery"
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
