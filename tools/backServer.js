@@ -33,12 +33,23 @@ app.get('/flight_search/:airline_code', function(req,res){
     let date = req.query.date;
     let from = req.query.from;
     let to = req.query.to;
-    let query = {date:date, from:from, to:to};
+    let query = {from,to,date};
     request.get({baseUrl:base_url, url:'/flight_search/'+airline_code, qs:query},function(error,response,body){
       if(!error && response.statusCode == 200){
         res.send(JSON.parse(body));
       }
     });
+});
+
+app.get('/search', function(req,res){
+  let from = req.query.from;
+  let to = req.query.to;
+  let date = req.query.date;
+
+  let query = {from,to,date};
+
+  res.send(query);
+
 });
 
 app.listen(3002);
