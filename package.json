@@ -4,7 +4,7 @@
   "description": "Locomote - Node Test",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel open:src open:back lint:watch",
+    "start": "npm-run-all --parallel open:src lint:watch",
     "open:src": "babel-node tools/srcServer.js",
     "open:back": "babel-node tools/backServer.js",
     "clean-dist": "rimraf ./dist && mkdir dist",
@@ -22,7 +22,8 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "express": "^4.14.0",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "babel-cli": "6.18.0",
