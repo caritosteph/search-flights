@@ -5,7 +5,6 @@ import request from 'request';
 import map from 'lodash/map';
 
 const app =  express();
-const base_url = 'http://node.locomote.com/code-task';
 const port = 3000;
 
 app.use(function(req, res, next) {
@@ -15,14 +14,13 @@ app.use(function(req, res, next) {
 });
 
 app.get('/airlines',function(req,res){
-  request.get({baseUrl:base_url, url:'/airlines'}, function(error, response, body){
-    if(!error && response.statusCode == 200){
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.parse(body));
-    }else{
-      res.send({success: false, msg: body});
-    }
-  });
+  try
+    airlines = LocomoteAPIRequester.airlines()
+    res.setHeader('Content-Type', 'application/json');
+    res.send(airlines); // manejar excepcion
+  catch(exception) {
+    res.send({success: false, msg: exception.message});
+  }
 });
 
 app.get('/airports', function(req,res){
