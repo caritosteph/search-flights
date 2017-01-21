@@ -1,4 +1,4 @@
-class LocomoteAPIRequester {
+var LocomoteAPIRequester {
   const base_url = 'http://node.locomote.com/code-task';
 
   airlines: function() {
@@ -6,7 +6,7 @@ class LocomoteAPIRequester {
       if(!error && response.statusCode == 200){
         return JSON.parse(body)
       }else{
-        res.send({success: false, msg: body}); //enviar excepcion
+        throw Error; //enviar excepcion
       }
     });
   }

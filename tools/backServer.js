@@ -14,9 +14,13 @@ app.use(function(req, res, next) {
 });
 
 app.get('/airlines',function(req,res){
-  airlines = LocomoteAPIRequester.airlines()
-  res.setHeader('Content-Type', 'application/json');
-  res.send(airlines); // manejar excepcion
+  try
+    airlines = LocomoteAPIRequester.airlines()
+    res.setHeader('Content-Type', 'application/json');
+    res.send(airlines); // manejar excepcion
+  catch(exception) {
+    res.send({success: false, msg: exception.message});
+  }
 });
 
 app.get('/airports', function(req,res){
