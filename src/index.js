@@ -4,13 +4,14 @@ import '../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.c
 import '../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
 import './styles/main.css';
 import map from 'lodash/map';
+import forEach from 'lodash/forEach';
+import moment from 'moment';
 
 $('#travel-date input').datepicker({
     format: "yyyy-mm-dd",
     clearBtn: true,
     orientation: "bottom left",
-    keyboardNavigation: false,
-    forceParse: false
+    startDate: "today"
 });
 
 $('#search-flight').submit(function(e){
@@ -21,12 +22,11 @@ $('#search-flight').submit(function(e){
   let locations = [from,to];
   let request = map(locations,function(location){
         return new Promise((resolve)=> {
-          resolve(get_airline_code(location))
+          resolve(get_airline_code(location));
         });
       });
   Promise.all(request).then(data=> {
     let query = {from: data[0], to: data[1], date};
-    console.log("query: ",query);
     search_flight(query);
   });
 });
@@ -39,10 +39,12 @@ function search_flight(params){
       });
   request.done(function(data){
     console.log("data: ",data);
+    // cheaper_flight(data);
+    generate_tabs_nearby_dates(params);
   });
 }
 function get_airline_code(location){
-  return new Promise((resolve,reject)=>{
+  return new Promise((resolve)=>{
     let params = {q:location};
     $.ajax({
           url: 'http://localhost:3000/airports',
@@ -54,3 +56,31 @@ function get_airline_code(location){
     });
   });
 }
+
+function generate_tabs_nearby_dates(params){
+  let generate_dates = [-2,-1,0,1,2];
+  let nearby_dates = [];
+  forEach(generate_dates, (value) => {
+    nearby_dates.push(moment(params.date).clone().add(value, 'day').format("YYYY-MM-DD"));
+  });
+  forEach(nearby_dates, (date) => {
+    $('#tabs').append($('<li/>',{
+      id: date,
+      class: 'nearby_dates'
+    }).append($('<a/>',{
+      href:'#'
+    }).text(date)).data('params',params));
+  });
+  $('#tabs :nth-child(3)').addClass('active');
+}
+
+$('#tabs').on('click','li.nearby_dates',function(e){
+  let date = e.target.innerText;
+  let params = $('#'+date).data('params');
+  params.date = date;
+  console.log("ev: ",params);
+});
+
+// function cheaper_flight(data){
+//
+// }
