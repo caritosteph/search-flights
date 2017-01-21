@@ -12,7 +12,7 @@ export default {
   debug: true,
   devtool: 'source-map',
   noInfo: true,
-  entry: path.resolve(__dirname, 'src/index'),
+  entry: path.resolve(__dirname, 'client/src/index'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -36,7 +36,7 @@ export default {
     new ExtractTextPlugin('[name].[contenthash].css'),  // Generate an external css file with a hash in the filename.
 
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'client/src/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,

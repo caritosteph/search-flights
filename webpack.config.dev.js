@@ -10,7 +10,7 @@ export default {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, 'src/index.js') // Defining path seems necessary for this to work consistently on Windows machines.
+    path.resolve(__dirname, 'client/src/index.js')
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -30,7 +30,7 @@ export default {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'client/src/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true

@@ -2,7 +2,7 @@ import browserSync from 'browser-sync';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config.dev'; // dev environment
+import config from '../../webpack.config.dev'; // dev environment
 
 const bundler = webpack(config);
 
@@ -12,7 +12,7 @@ browserSync({
     port: 3002
   },
   server: {
-    baseDir: 'src',
+    baseDir: 'client/src',
 
     middleware: [
       webpackDevMiddleware(bundler, {
@@ -34,6 +34,6 @@ browserSync({
   },
   // Watch html files
   files: [
-    'src/*.html'
+    'client/src/*.html'
   ]
 });

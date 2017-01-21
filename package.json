@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel open:src lint:watch",
-    "open:src": "babel-node tools/srcServer.js",
-    "open:back": "babel-node tools/backServer.js",
+    "open:src": "babel-node client/tools/srcServer.js",
+    "open:back": "babel-node server/server.js",
     "clean-dist": "rimraf ./dist && mkdir dist",
-    "open:dist": "babel-node tools/distServer.js",
-    "build": "npm run clean-dist && babel-node tools/build.js && npm run open:dist",
-    "lint": "esw webpack.config.* src tools --color",
+    "open:dist": "babel-node client/tools/distServer.js",
+    "build": "npm run clean-dist && babel-node client/tools/build.js && npm run open:dist",
+    "lint": "esw webpack.config.* src client/tools --color",
     "lint:watch": "npm run lint -- --watch"
   },
   "repository": {

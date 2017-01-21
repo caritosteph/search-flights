@@ -1,7 +1,7 @@
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/bootstrap/dist/js/bootstrap.min';
-import '../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
-import '../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../node_modules/bootstrap/dist/js/bootstrap.min';
+import '../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
+import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
 import './styles/main.css';
 import map from 'lodash/map';
 import forEach from 'lodash/forEach';
