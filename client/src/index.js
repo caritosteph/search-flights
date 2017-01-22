@@ -27,6 +27,7 @@ $('#search-flight').submit(function(e){
       });
   Promise.all(request).then(data=> {
     let query = {from: data[0], to: data[1], date};
+    generate_tabs_nearby_dates(query);
     search_flight(query);
   });
 });
@@ -37,11 +38,12 @@ function search_flight(params){
         method: 'GET',
         data: params
       });
-  request.done(function(data){
-    console.log("data: ",data);
+  request.done(function(airlines){
     // cheaper_flight(data);
-    generate_tabs_nearby_dates(params);
+    // generate_tabs_nearby_dates(params);
+    generate_flights(airlines);
   });
+  return request;
 }
 function get_airline_code(location){
   return new Promise((resolve)=>{
@@ -68,19 +70,39 @@ function generate_tabs_nearby_dates(params){
       id: date,
       class: 'nearby_dates'
     }).append($('<a/>',{
-      href:'#'
+      href:'#flights'
     }).text(date)).data('params',params));
   });
   $('#tabs :nth-child(3)').addClass('active');
+  $('.tab-content').show();
 }
 
 $('#tabs').on('click','li.nearby_dates',function(e){
   let date = e.target.innerText;
   let params = $('#'+date).data('params');
   params.date = date;
-  console.log("ev: ",params);
+  $('#tabs li').removeClass('active');
+  $('#'+date).addClass('active');
+  $('#flights').empty();
+  search_flight(params);
 });
 
-// function cheaper_flight(data){
-//
-// }
+function generate_flights(airlines){
+  $('.tab-content').show();
+
+  forEach(airlines, (airline) => {
+    $('#flights').append($('<div/>',{
+      class: 'col-md-4',
+      id: airline.airline_code
+    }).append($('<h3/>').text(airline.flights[0].airline.name)));
+
+    forEach(airline.flights, (flight) => {
+      $('#'+flight.airline.code)
+      .append($('<p/>').text(flight.flightNum))
+      .append($('<p/>').text(flight.start.cityName))
+      .append($('<p/>').text(flight.finish.cityName));
+
+    });
+  });
+
+}

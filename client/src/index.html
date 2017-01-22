@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top topbar">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -17,13 +17,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Flight Search</a>
+          <a class="navbar-brand" href="#">
+            <img src="assets/images/air_flights.jpg" alt="AirFlights">
+          </a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right navbar-items">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -35,19 +36,22 @@
       <div class="row">
         <form class="col-md-6 col-md-offset-3" id="search-flight">
           <div class="form-group">
-            <label for="from">From location</label>
+            <label for="from">Departure City</label>
             <input type="text" name="from" class="form-control" autofocus placeholder="e.g. Sydney" required>
           </div>
           <div class="form-group">
-            <label for="to">To location</label>
+            <label for="to">Destination City</label>
             <input type="text" name="to" class="form-control" placeholder="e.g. Heathrow" required>
           </div>
           <div class="form-group" id="travel-date">
-            <label for="to">Travel date</label>
+            <label for="to">When do you plan on travelling?</label>
             <input type="text" name="date" class="form-control" placeholder="e.g. 2016-09-02" required>
           </div>
-          <button type="submit" name="search" class="btn btn-primary">search</button>
+          <button type="submit" name="search" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Search</button>
         </form>
+        <!-- <div class="modal fade bs-example-modal-sm">
+          <div id="loader"></div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -57,11 +61,16 @@
       <div class="row">
         <ul id="tabs" class="nav nav-tabs nav-justified">
         </ul>
+        <div class="tab-content" style="display:none">
+          <div id="flights">
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer>
+  <footer class="footer">
+    <p>© 2017 Carolyn Ulfe.</p>
   </footer>
 
 </body>
