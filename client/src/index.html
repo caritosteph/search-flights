@@ -24,7 +24,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right navbar-items">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#tab-flight">About</a></li>
           </ul>
         </div>
       </div>
@@ -34,6 +34,9 @@
   <section id="search">
     <div class="container">
       <div class="row">
+        <div class="title">
+          <h2 class="text-center">Search Flights</h2>
+        </div>
         <form class="col-md-6 col-md-offset-3" id="search-flight">
           <div class="form-group">
             <label for="from">Departure City</label>
@@ -47,16 +50,17 @@
             <label for="to">When do you plan on travelling?</label>
             <input type="text" name="date" class="form-control" placeholder="e.g. 2016-09-02" required>
           </div>
-          <button type="submit" name="search" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Search</button>
+          <button type="submit" name="search" class="btn btn-primary">Search</button>
         </form>
-        <!-- <div class="modal fade bs-example-modal-sm">
-          <div id="loader"></div>
-        </div> -->
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="tab-flights">
+    <div id="loading" style="display:none">
+      <div id="message-loader">Please wait ...</div>
+      <div id="loader"></div>
+    </div>
     <div class="container">
       <div class="row">
         <ul id="tabs" class="nav nav-tabs nav-justified">
@@ -69,9 +73,9 @@
     </div>
   </section>
 
-  <footer class="footer">
+  <!-- <footer class="footer">
     <p>© 2017 Carolyn Ulfe.</p>
-  </footer>
+  </footer> -->
 
 </body>
 </html>

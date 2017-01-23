@@ -2,24 +2,32 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.min';
 import '../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
-import './styles/main.css';
+import './assets/styles/main.css';
 import map from 'lodash/map';
 import forEach from 'lodash/forEach';
 import moment from 'moment';
 
 $('#travel-date input').datepicker({
-    format: "yyyy-mm-dd",
-    clearBtn: true,
-    orientation: "bottom left",
-    startDate: "today"
+    format: 'yyyy-mm-dd',
+    startDate: 'today',
+    autoclose: true,
+    todayHighlight: true
 });
 
 $('#search-flight').submit(function(e){
   e.preventDefault();
+  $('#loading').show();
+  $('#tabs').empty();
+  $('#flights').empty();
+  $('html,body').animate({
+    scrollTop: $("#tab-flights").offset().top},
+  'slow');
   let from = $('input[name=from]').val();
   let to  = $('input[name=to]').val();
   let date = $('input[name=date]').val();
   let locations = [from,to];
+  clean_form();
+
   let request = map(locations,function(location){
         return new Promise((resolve)=> {
           resolve(get_airline_code(location));
@@ -39,8 +47,6 @@ function search_flight(params){
         data: params
       });
   request.done(function(airlines){
-    // cheaper_flight(data);
-    // generate_tabs_nearby_dates(params);
     generate_flights(airlines);
   });
   return request;
@@ -79,6 +85,7 @@ function generate_tabs_nearby_dates(params){
 
 $('#tabs').on('click','li.nearby_dates',function(e){
   let date = e.target.innerText;
+
   let params = $('#'+date).data('params');
   params.date = date;
   $('#tabs li').removeClass('active');
@@ -92,17 +99,40 @@ function generate_flights(airlines){
 
   forEach(airlines, (airline) => {
     $('#flights').append($('<div/>',{
-      class: 'col-md-4',
+      class: 'col-md-4 list-flights',
       id: airline.airline_code
-    }).append($('<h3/>').text(airline.flights[0].airline.name)));
+    }).append($('<div/>',{
+      class: 'list-header'
+    }).text(airline.flights[0].airline.name)));
 
     forEach(airline.flights, (flight) => {
       $('#'+flight.airline.code)
-      .append($('<p/>').text(flight.flightNum))
-      .append($('<p/>').text(flight.start.cityName))
-      .append($('<p/>').text(flight.finish.cityName));
-
+      .append($('<div/>',{
+        class: 'list-body'
+      }).append($('<div/>',{
+        class: 'col-md-6'
+      }).append($('<p/>').text('Flight Number: '+flight.flightNum))
+        .append($('<p/>').text(moment.parseZone(flight.start.dateTime).format('hh:mm a')+' - '+moment.parseZone(flight.finish.dateTime).format('hh:mm a')))
+        .append($('<p/>').text(flight.start.cityName+' - '+flight.finish.cityName)))
+      .append($('<div/>',{
+        class: 'col-md-6'
+      }).append($('<p/>').text('Plane: '+flight.plane.shortName))
+        .append($('<p/>').text('Flight Time: '+min_to_hours(flight.durationMin)))
+        .append($('<p/>').text('Price: $AUD '+flight.price))));
     });
   });
+}
 
+$('#flights').on('click','div.list-body',function(e){
+  console.log('dfghjkl: ',e);
+});
+
+
+function min_to_hours(duration){
+  let hours = Math.trunc(duration/60);
+  let minutes = duration%60;
+  return hours+'h '+minutes+'m';
+}
+function clean_form(){
+  $('#search-flight').trigger("reset");
 }
