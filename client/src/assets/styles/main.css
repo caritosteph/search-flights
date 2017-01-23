@@ -1,8 +1,5 @@
 body,html{
   height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
 }
 
 /*
@@ -47,9 +44,9 @@ body,html{
  * Form styles
  */
 
-section{
+#search{
   padding-top: 130px;
-  padding-bottom: 23px;
+  min-height: 100%;
 }
 .title{
   margin-bottom: 30px;
@@ -116,6 +113,9 @@ label{
 /*
  * Tabs styles
  */
+ #tab-flights{
+   /*padding-bottom: 50px;*/
+ }
 .nav-tabs.nav-justified>li>a {
   border-bottom: 2px solid #0084da;
 }
@@ -169,12 +169,11 @@ label{
  * Footer styles
  */
 .footer{
-  position: absolute;
+  position: fixed;
+  padding: 1em;
+  bottom: 0;
+  width: 100%;
+  background-color: #0084da;
   color: #fff;
   text-align: center;
-  background-color: #0084da;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1em;
 }
