@@ -32,32 +32,32 @@ class LocomoteAPIRequester {
   search(query){
     let self = this;
     return new Promise((resolve,reject) => {
-      request.get({baseUrl:BASE_URL, url:'/airlines'}, function(error, response, body){
-        if(!error && response.statusCode == 200){
-          let airlines = JSON.parse(body);
-          let requests = map(airlines,function(value){
-                return new Promise((resolve)=>{
-                  let airline_code = value.code;
-                  resolve(self.flight_search(airline_code,query));
-                });
-            });
-          Promise.all(requests)
-          .then((data) => {
-            resolve(data);
-          })
-          .catch(error => {
-            reject(error);
+      let airlines = self.airlines();
+      airlines
+      .then(airlines => {
+        let requests = map(airlines,function(value){
+              return new Promise((resolve)=>{
+                let airline_code = value.code;
+                resolve(self.flight_search(airline_code,query));
+              });
           });
-        }else{
-          reject({success: false, msg: body});
-        }
+        Promise.all(requests)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+      })
+      .catch(error => {
+        reject(error);
       });
     });
   }
 
   flight_search(airline_code,query){
      return new Promise((resolve,reject) => {
-      request.get({baseUrl:BASE_URL, url:'/flight_search/'+airline_code, qs:query},function(error, response, body){
+      request.get({baseUrl:BASE_URL, url:'/flight_search/' + airline_code, qs:query},function(error, response, body){
         if(!error && response.statusCode == 200){
           let data = JSON.parse(body);
           resolve({airline_code:airline_code,flights:data});

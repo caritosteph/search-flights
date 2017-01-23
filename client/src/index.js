@@ -123,11 +123,6 @@ function generate_flights(airlines){
   });
 }
 
-$('#flights').on('click','div.list-body',function(e){
-  console.log('dfghjkl: ',e);
-});
-
-
 function min_to_hours(duration){
   let hours = Math.trunc(duration/60);
   let minutes = duration%60;
