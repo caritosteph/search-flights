@@ -27,7 +27,6 @@ $('#search-flight').submit(function(e){
   let date = $('input[name=date]').val();
   let locations = [from,to];
   clean_form();
-
   let request = map(locations,function(location){
         return new Promise((resolve)=> {
           resolve(get_airline_code(location));
@@ -85,7 +84,6 @@ function generate_tabs_nearby_dates(params){
 
 $('#tabs').on('click','li.nearby_dates',function(e){
   let date = e.target.innerText;
-
   let params = $('#'+date).data('params');
   params.date = date;
   $('#tabs li').removeClass('active');
@@ -116,7 +114,7 @@ function generate_flights(airlines){
         .append($('<p/>').text(flight.start.cityName+' - '+flight.finish.cityName)))
       .append($('<div/>',{
         class: 'col-md-6'
-      }).append($('<p/>').text('Plane: '+flight.plane.shortName))
+      }).append($('<p/>').text(flight.plane.shortName))
         .append($('<p/>').text('Flight Time: '+min_to_hours(flight.durationMin)))
         .append($('<p/>').text('Price: $AUD '+flight.price))));
     });
@@ -124,7 +122,7 @@ function generate_flights(airlines){
 }
 
 function min_to_hours(duration){
-  let hours = Math.trunc(duration/60);
+  let hours = Math.floor(duration/60);
   let minutes = duration%60;
   return hours+'h '+minutes+'m';
 }

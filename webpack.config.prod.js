@@ -22,7 +22,8 @@ export default {
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
-      jquery: 'jquery'
+      jquery: 'jquery',
+      'Promise': 'es6-promise'
     }),
     new WebpackMd5Hash(), // Using md5 to change names.
 

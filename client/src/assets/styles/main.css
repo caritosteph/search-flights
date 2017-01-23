@@ -56,8 +56,9 @@ label{
 }
 .form-control{
   border-radius: 0;
-  padding: 25px 0 25px 10px;
+  padding: 18px 0 15px 10px;
   font-size: 16px;
+  height: auto;
 }
 .btn-primary{
   background-color: #0084da;
@@ -159,7 +160,7 @@ label{
   border-radius: 0;
   padding: 10px 0 0 0;
   text-align: justify;
-  cursor: pointer;
+  cursor: default;
 }
 .list-body:hover{
   background-color: #c9e7fa;
