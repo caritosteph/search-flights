@@ -2,10 +2,12 @@
 /* eslint-disable no-console */
 import express from 'express';
 import API from './LocomoteAPIRequester';
+import Utils from './Utils';
 import {PORT} from './constants';
 
 const app =  express();
 const api = new API();
+const utils = new Utils();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -16,11 +18,10 @@ app.use(function(req, res, next) {
 app.get('/airlines',function(req,res){
     api.airlines()
     .then(data => {
-      res.setHeader('Content-Type', 'application/json');
-      res.send({success: true, data: data});
+      utils.send_data(res,true,data);
     })
     .catch(error => {
-      res.send({success: false, msg: error});
+      utils.send_data(res,false,error);
     });
 });
 
@@ -29,11 +30,10 @@ app.get('/airports', function(req,res){
 
     api.airports(city)
     .then(data => {
-      res.setHeader('Content-Type', 'application/json');
-      res.send({success: true, data: data});
+      utils.send_data(res,true,data);
     })
     .catch(error => {
-      res.send({success: false, msg: error});
+      utils.send_data(res,false,error);
     });
 });
 
@@ -45,11 +45,10 @@ app.get('/search', function(req,res){
 
   api.search(query)
   .then(data => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send({success: true, data: data});
+    utils.send_data(res,true,data);
   })
   .catch(error => {
-    res.send({success: false, msg: error});
+    utils.send_data(res,false,error);
   });
 });
 
