@@ -1,7 +1,7 @@
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../../node_modules/bootstrap/dist/js/bootstrap.min';
 import '../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
+import '../../node_modules/bootstrap/dist/js/bootstrap.min';
 import './assets/styles/main.css';
 import map from 'lodash/map';
 import forEach from 'lodash/forEach';
@@ -14,19 +14,22 @@ $('#travel-date input').datepicker({
     todayHighlight: true
 });
 
-$('#search-flight').submit(function(e){
-  e.preventDefault();
-  $('#loading').show();
+$('#nav-search').click(function(){
+  $('#search').show();
   $('#tabs').empty();
   $('#flights').empty();
-  $('html,body').animate({
-    scrollTop: $("#tab-flights").offset().top},
-  'slow');
+  $('#search-again').remove();
+});
+
+$('#search-flight').submit(function(e){
+  e.preventDefault();
+  $('#tabs').empty();
+  $('#flights').empty();
+  loading();
   let from = $('input[name=from]').val();
   let to  = $('input[name=to]').val();
   let date = $('input[name=date]').val();
   let locations = [from,to];
-  clean_form();
   let request = map(locations,function(location){
         return new Promise((resolve)=> {
           resolve(get_airline_code(location));
@@ -35,6 +38,7 @@ $('#search-flight').submit(function(e){
   Promise.all(request).then(data=> {
     let query = {from: data[0], to: data[1], date};
     generate_tabs_nearby_dates(query);
+    $('#tabs li.active').off('click');
     search_flight(query);
   });
 });
@@ -82,19 +86,26 @@ function generate_tabs_nearby_dates(params){
   $('.tab-content').show();
 }
 
-$('#tabs').on('click','li.nearby_dates',function(e){
+$('#tabs').on('click','li.nearby_dates:not(.active)',function(e){
+  loading();
   let date = e.target.innerText;
   let params = $('#'+date).data('params');
   params.date = date;
   $('#tabs li').removeClass('active');
   $('#'+date).addClass('active');
   $('#flights').empty();
+  $('#search-again').remove();
+  $('#search').hide();
   search_flight(params);
 });
 
 function generate_flights(airlines){
+  navbar_search();
+  clean_form();
+  $('#search').hide();
+  stop_loading();
+  $('#tabs').show();
   $('.tab-content').show();
-
   forEach(airlines, (airline) => {
     $('#flights').append($('<div/>',{
       class: 'col-md-4 list-flights',
@@ -119,7 +130,31 @@ function generate_flights(airlines){
         .append($('<p/>').text('Price: $AUD '+flight.price))));
     });
   });
+
 }
+
+function loading(){
+  $('#redoverlay').show();
+  $('#loading').show();
+}
+function stop_loading(){
+  $('#redoverlay').hide();
+  $('#loading').hide();
+}
+function navbar_search(){
+  $('#nav-search').append($('<li/>',{
+    class: 'active',
+    id: 'search-again'
+  }).append($('<a/>',{
+    href: "#search"
+  }).text('Search')));
+}
+
+$('#logo').click(function(){
+  $('#tabs').empty();
+  $('#flights').empty();
+  $('#search-again').remove();
+});
 
 function min_to_hours(duration){
   let hours = Math.floor(duration/60);

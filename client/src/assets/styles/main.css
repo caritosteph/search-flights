@@ -7,7 +7,8 @@ body,html {
  */
 .navbar-default {
   background-color: #0084da;
-  padding-bottom: 25px;
+  padding-bottom: 30px;
+  border-color: #0084da;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:focus,
@@ -46,7 +47,6 @@ body,html {
 
 #search {
   padding-top: 130px;
-  min-height: 100%;
 }
 .title {
   margin-bottom: 30px;
@@ -105,17 +105,31 @@ label {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+#redoverlay {
+    background-color: #000;
+    opacity: 0.6;
+    filter:alpha(opacity=70);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 /*
  * Tabs styles
  */
  #tab-flights {
-   /*padding-bottom: 50px;*/
+   padding-top: 102px;
+   margin-bottom: 40px;
+ }
+ #tabs {
+   overflow: auto;
  }
 .nav-tabs.nav-justified > li > a {
   border-bottom: 2px solid #0084da;
@@ -171,7 +185,7 @@ label {
  */
 .footer {
   position: fixed;
-  padding: 1em;
+  padding: 0.5em;
   bottom: 0;
   width: 100%;
   background-color: #0084da;
