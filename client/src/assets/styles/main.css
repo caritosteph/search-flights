@@ -1,3 +1,6 @@
+@import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../../../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
+
 body,html {
   height: 100%;
 }
@@ -120,7 +123,15 @@ label {
     height: 100%;
     z-index: 1;
 }
-
+.alert-danger{
+  height: 90px;
+  width: 200px;
+  position: absolute;
+  z-index: 6;
+  right: 0;
+  top: 80px;
+  text-align: center;
+}
 /*
  * Tabs styles
  */
@@ -156,6 +167,9 @@ label {
 #flights {
   padding-top: 20px;
 }
+.cities-duration {
+  margin-bottom: 15px;
+}
 .list-flights {
   margin-bottom: 15px;
 }
@@ -169,7 +183,7 @@ label {
   color: #fff;
 }
 .list-body {
-  height: 100px;
+  height: 70px;
   border: 1px solid #0084da;
   border-radius: 0;
   padding: 10px 0 0 0;

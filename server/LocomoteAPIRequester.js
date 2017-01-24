@@ -11,7 +11,7 @@ class LocomoteAPIRequester {
         if(!error && response.statusCode == 200){
           resolve(JSON.parse(body));
         }else{
-          reject({success: false, msg: body});
+          reject(body);
         }
       });
     });
@@ -21,9 +21,14 @@ class LocomoteAPIRequester {
     return new Promise((resolve,reject) => {
       request.get({baseUrl:BASE_URL, url:'/airports', qs:{q:city}},function(error,response,body){
         if(!error && response.statusCode == 200){
-          resolve(JSON.parse(body));
+          let data = JSON.parse(body);
+          if(data.length>0){
+            resolve(JSON.parse(body));
+          }else{
+            reject('No airport found in '+city);
+          }
         }else{
-          reject({success: false, msg: body});
+          reject(body);
         }
       });
     });
@@ -62,7 +67,7 @@ class LocomoteAPIRequester {
           let data = JSON.parse(body);
           resolve({airline_code:airline_code,flights:data});
         }else{
-          reject({success: false, msg: body});
+          reject(body);
         }
      });
     });

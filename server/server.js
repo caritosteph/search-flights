@@ -17,10 +17,10 @@ app.get('/airlines',function(req,res){
     api.airlines()
     .then(data => {
       res.setHeader('Content-Type', 'application/json');
-      res.send(data);
+      res.send({success: true, data: data});
     })
     .catch(error => {
-      res.send(error);
+      res.send({success: false, msg: error});
     });
 });
 
@@ -30,10 +30,10 @@ app.get('/airports', function(req,res){
     api.airports(city)
     .then(data => {
       res.setHeader('Content-Type', 'application/json');
-      res.send(data);
+      res.send({success: true, data: data});
     })
     .catch(error => {
-      res.send(error);
+      res.send({success: false, msg: error});
     });
 });
 
@@ -46,10 +46,10 @@ app.get('/search', function(req,res){
   api.search(query)
   .then(data => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(data);
+    res.send({success: true, data: data});
   })
   .catch(error => {
-    res.send(error);
+    res.send({success: false, msg: error});
   });
 });
 

@@ -1,20 +1,20 @@
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
-import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
-import '../../node_modules/bootstrap/dist/js/bootstrap.min';
 import './assets/styles/main.css';
+
+import '../../node_modules/bootstrap/dist/js/bootstrap.min';
+import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
 import map from 'lodash/map';
 import forEach from 'lodash/forEach';
 import moment from 'moment';
 
 $('#travel-date input').datepicker({
     format: 'yyyy-mm-dd',
-    startDate: 'today',
+    startDate: 'tomorrow',
     autoclose: true,
     todayHighlight: true
 });
 
 $('#nav-search').click(function(){
+  clean_form();
   $('#search').show();
   $('#tabs').empty();
   $('#flights').empty();
@@ -49,8 +49,11 @@ function search_flight(params){
         method: 'GET',
         data: params
       });
-  request.done(function(airlines){
-    generate_flights(airlines);
+  request.done(function(response){
+    if(response.success){
+      let flights = response.data;
+      generate_flights(flights);
+    }
   });
   return request;
 }
@@ -62,8 +65,19 @@ function get_airline_code(location){
           method: 'GET',
           data: params
         })
-    .done(function(data){
-      resolve(data[0].airportCode);
+    .done(function(response){
+      if(response.success){
+        let airports = response.data;
+        resolve(airports[0].airportCode);
+      }else{
+        stop_loading();
+        $('#myAlert strong').text(response.msg);
+        $("#myAlert").show();
+        $("#myAlert").fadeTo(3000, 0).slideUp(500, function(){
+            closeFn();
+            $(this).hide();
+        });
+      }
     });
   });
 }
@@ -100,12 +114,14 @@ $('#tabs').on('click','li.nearby_dates:not(.active)',function(e){
 });
 
 function generate_flights(airlines){
-  navbar_search();
   clean_form();
+  navbar_search();
   $('#search').hide();
   stop_loading();
   $('#tabs').show();
   $('.tab-content').show();
+  cities_duration(airlines);
+
   forEach(airlines, (airline) => {
     $('#flights').append($('<div/>',{
       class: 'col-md-4 list-flights',
@@ -121,12 +137,11 @@ function generate_flights(airlines){
       }).append($('<div/>',{
         class: 'col-md-6 col-sm-12'
       }).append($('<p/>').text('Flight Number: '+flight.flightNum))
-        .append($('<p/>').text(moment.parseZone(flight.start.dateTime).format('hh:mm a')+' - '+moment.parseZone(flight.finish.dateTime).format('hh:mm a')))
-        .append($('<p/>').text(flight.start.cityName+' - '+flight.finish.cityName)))
-      .append($('<div/>',{
-        class: 'col-md-6 col-sm-12'
-      }).append($('<p/>').text(flight.plane.shortName))
-        .append($('<p/>').text('Flight Time: '+min_to_hours(flight.durationMin)))
+        .append($('<p/>').text(moment.parseZone(flight.start.dateTime).format('hh:mm a')+' - '+moment.parseZone(flight.finish.dateTime).format('hh:mm a'))))
+        .append($('<div/>',{
+          class: 'col-md-6 col-sm-12'
+        })
+        .append($('<p/>').text(flight.plane.shortName))
         .append($('<p/>').text('Price: $AUD '+flight.price))));
     });
   });
@@ -151,12 +166,28 @@ function navbar_search(){
 }
 
 $('#logo').click(function(){
+  clean_form();
+
   $('#search').show();
   $('#tabs').empty();
   $('#flights').empty();
   $('#search-again').remove();
 });
 
+function cities_duration(airlines){
+  let start_city = airlines[0].flights[0].start.cityName;
+  let finish_city = airlines[0].flights[0].finish.cityName;
+  let duration = min_to_hours(airlines[0].flights[0].durationMin);
+
+  $('#flights').append($('<div/>',{
+    class: 'col-md-12 cities-duration'
+  }).append($('<div/>',{
+    class: 'col-md-6 text-right'
+  }).append($('<h2/>').text(start_city+' - '+finish_city)))
+  .append($('<div/>',{
+    class: 'col-md-6 text-left'
+  }).append($('<h2/>').text('Flight Time: '+duration))));
+}
 function min_to_hours(duration){
   let hours = Math.floor(duration/60);
   let minutes = duration%60;
