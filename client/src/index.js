@@ -119,12 +119,12 @@ function generate_flights(airlines){
       .append($('<div/>',{
         class: 'list-body'
       }).append($('<div/>',{
-        class: 'col-md-6'
+        class: 'col-md-6 col-sm-12'
       }).append($('<p/>').text('Flight Number: '+flight.flightNum))
         .append($('<p/>').text(moment.parseZone(flight.start.dateTime).format('hh:mm a')+' - '+moment.parseZone(flight.finish.dateTime).format('hh:mm a')))
         .append($('<p/>').text(flight.start.cityName+' - '+flight.finish.cityName)))
       .append($('<div/>',{
-        class: 'col-md-6'
+        class: 'col-md-6 col-sm-12'
       }).append($('<p/>').text(flight.plane.shortName))
         .append($('<p/>').text('Flight Time: '+min_to_hours(flight.durationMin)))
         .append($('<p/>').text('Price: $AUD '+flight.price))));
@@ -151,6 +151,7 @@ function navbar_search(){
 }
 
 $('#logo').click(function(){
+  $('#search').show();
   $('#tabs').empty();
   $('#flights').empty();
   $('#search-again').remove();

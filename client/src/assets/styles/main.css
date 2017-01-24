@@ -111,7 +111,7 @@ label {
 }
 #redoverlay {
     background-color: #000;
-    opacity: 0.6;
+    opacity: 0.8;
     filter:alpha(opacity=70);
     position: absolute;
     top: 0px;
