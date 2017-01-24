@@ -6,8 +6,6 @@ import Utils from './Utils';
 import {PORT} from './constants';
 
 const app =  express();
-const api = new API();
-const utils = new Utils();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -16,24 +14,24 @@ app.use(function(req, res, next) {
 });
 
 app.get('/airlines',function(req,res){
-    api.airlines()
+    API.airlines()
     .then(data => {
-      utils.send_data(res,true,data);
+      Utils.send_data(res,true,data);
     })
     .catch(error => {
-      utils.send_data(res,false,error);
+      Utils.send_data(res,false,error);
     });
 });
 
 app.get('/airports', function(req,res){
     let city = req.query.q;
 
-    api.airports(city)
+    API.airports(city)
     .then(data => {
-      utils.send_data(res,true,data);
+      Utils.send_data(res,true,data);
     })
     .catch(error => {
-      utils.send_data(res,false,error);
+      Utils.send_data(res,false,error);
     });
 });
 
@@ -43,12 +41,12 @@ app.get('/search', function(req,res){
   let date = req.query.date;
   let query = {from,to,date};
 
-  api.search(query)
+  API.search(query)
   .then(data => {
-    utils.send_data(res,true,data);
+    Utils.send_data(res,true,data);
   })
   .catch(error => {
-    utils.send_data(res,false,error);
+    Utils.send_data(res,false,error);
   });
 });
 

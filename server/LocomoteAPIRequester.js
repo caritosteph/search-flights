@@ -5,7 +5,7 @@ import {BASE_URL} from './constants';
 
 class LocomoteAPIRequester {
 
-  airlines(){
+  static airlines(){
     return new Promise ((resolve,reject) => {
       request.get({baseUrl:BASE_URL, url:'/airlines'}, function(error, response, body){
         if(!error && response.statusCode == 200){
@@ -17,7 +17,7 @@ class LocomoteAPIRequester {
     });
   }
 
-  airports(city){
+  static airports(city){
     return new Promise((resolve,reject) => {
       request.get({baseUrl:BASE_URL, url:'/airports', qs:{q:city}},function(error,response,body){
         if(!error && response.statusCode == 200){
@@ -34,7 +34,7 @@ class LocomoteAPIRequester {
     });
   }
 
-  search(query){
+  static search(query){
     let self = this;
     return new Promise((resolve,reject) => {
       let airlines = self.airlines();
@@ -60,7 +60,7 @@ class LocomoteAPIRequester {
     });
   }
 
-  flight_search(airline_code,query){
+  static flight_search(airline_code,query){
      return new Promise((resolve,reject) => {
       request.get({baseUrl:BASE_URL, url:'/flight_search/' + airline_code, qs:query},function(error, response, body){
         if(!error && response.statusCode == 200){
