@@ -8,7 +8,6 @@ import moment from 'moment';
 
 $('#travel-date input').datepicker({
     format: 'yyyy-mm-dd',
-    startDate: 'today',
     autoclose: true,
     todayHighlight: true
 });
@@ -18,6 +17,7 @@ $('#nav-search').click(function(){
   $('#search').show();
   $('#tabs').empty();
   $('#flights').empty();
+  $('#airline-title').hide();
   $('#search-again').remove();
 });
 
@@ -53,11 +53,16 @@ function search_flight(params){
     if(response.success){
       let flights = response.data;
       generate_flights(flights);
+    }else{
+      let message = response.msg || 'Unexpected error';
+      stop_loading();
+      show_alert(message);
     }
   });
   return request;
 }
 function get_airline_code(location){
+
   return new Promise((resolve)=>{
     let params = {q:location};
     $.ajax({
@@ -70,12 +75,10 @@ function get_airline_code(location){
         let airports = response.data;
         resolve(airports[0].airportCode);
       }else{
-        stop_loading();
-        $('#myAlert strong').text(response.msg);
-        $("#myAlert").show();
-        $("#myAlert").fadeTo(3000, 0).slideUp(500, function(){
-            $(this).hide();
-        });
+          let message = response.msg;
+          stop_loading();
+          show_alert(message);
+
       }
     });
   });
@@ -119,11 +122,12 @@ function generate_flights(airlines){
   stop_loading();
   $('#tabs').show();
   $('.tab-content').show();
+  $('#airline-title').show();
   cities_duration(airlines);
 
   forEach(airlines, (airline) => {
     $('#flights').append($('<div/>',{
-      class: 'col-md-4 list-flights',
+      class: 'col-md-4 col-sm-6 list-flights',
       id: airline.airline_code
     }).append($('<div/>',{
       class: 'list-header'
@@ -134,11 +138,11 @@ function generate_flights(airlines){
       .append($('<div/>',{
         class: 'list-body'
       }).append($('<div/>',{
-        class: 'col-md-6 col-sm-12'
+        class: 'col-md-6 col-xs-6'
       }).append($('<p/>').text('Flight Number: '+flight.flightNum))
         .append($('<p/>').text(moment.parseZone(flight.start.dateTime).format('hh:mm a')+' - '+moment.parseZone(flight.finish.dateTime).format('hh:mm a'))))
         .append($('<div/>',{
-          class: 'col-md-6 col-sm-12'
+          class: 'col-md-6 col-xs-6'
         })
         .append($('<p/>').text(flight.plane.shortName))
         .append($('<p/>').text('Price: $AUD '+flight.price))));
@@ -167,9 +171,11 @@ function navbar_search(){
 $('#logo').click(function(){
   clean_form();
 
+
   $('#search').show();
   $('#tabs').empty();
   $('#flights').empty();
+  $('#airline-title').hide();
   $('#search-again').remove();
 });
 
@@ -181,10 +187,10 @@ function cities_duration(airlines){
   $('#flights').append($('<div/>',{
     class: 'col-md-12 cities-duration'
   }).append($('<div/>',{
-    class: 'col-md-6 text-right'
+    class: 'col-md-6 col-sm-6 cities'
   }).append($('<h2/>').text(start_city+' - '+finish_city)))
   .append($('<div/>',{
-    class: 'col-md-6 text-left'
+    class: 'col-md-6 col-sm-6 duration'
   }).append($('<h2/>').text('Flight Time: '+duration))));
 }
 function min_to_hours(duration){
@@ -194,4 +200,14 @@ function min_to_hours(duration){
 }
 function clean_form(){
   $('#search-flight').trigger("reset");
+}
+
+function show_alert(message){
+  $('#myAlert strong').text(message);
+  $("#myAlert").slideDown(2000, function(){
+    $(this).hide();
+  });
+  $("#myAlert").slideUp(3000, function(){
+    $(this).hide();
+  });
 }

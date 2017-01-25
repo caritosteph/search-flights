@@ -124,13 +124,16 @@ label {
     z-index: 1;
 }
 .alert-danger{
-  height: 90px;
-  width: 200px;
+  height: 50px;
+  width: 300px;
   position: absolute;
   z-index: 6;
   right: 0;
   top: 80px;
   text-align: center;
+  border-radius: 0;
+  background-color: #b63a13;
+  color: #fff;
 }
 /*
  * Tabs styles
@@ -165,6 +168,12 @@ label {
 }
 .cities-duration {
   margin-bottom: 15px;
+}
+.cities {
+  text-align: right;
+}
+.duration {
+  text-align: left;
 }
 .list-flights {
   margin-bottom: 15px;
@@ -201,4 +210,38 @@ label {
   background-color: #0084da;
   color: #fff;
   text-align: center;
+}
+/*
+ * Media query
+ */
+
+
+@media (max-width: 768px) {
+  .cities,
+  .duration {
+    text-align: center;
+  }
+  .cities > h2,
+  .duration > h2 {
+    font-size: 20px;
+  }
+  .list-body {
+    font-size: 11px;
+    height: 65px;
+  }
+  .nav-tabs.nav-justified > li > a {
+    border-bottom: 2px solid #b7b7bb;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cities > h2,
+  .duration > h2{
+    font-size: 20px;
+  }
+  .list-body{
+    font-size: 11px;
+    height: 65px;
+  }
+
 }
