@@ -8,7 +8,7 @@ import moment from 'moment';
 
 $('#travel-date input').datepicker({
     format: 'yyyy-mm-dd',
-    startDate: 'tomorrow',
+    startDate: 'today',
     autoclose: true,
     todayHighlight: true
 });
@@ -74,7 +74,6 @@ function get_airline_code(location){
         $('#myAlert strong').text(response.msg);
         $("#myAlert").show();
         $("#myAlert").fadeTo(3000, 0).slideUp(500, function(){
-            closeFn();
             $(this).hide();
         });
       }

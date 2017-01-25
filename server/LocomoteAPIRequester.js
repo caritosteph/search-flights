@@ -35,15 +35,15 @@ class LocomoteAPIRequester {
   }
 
   static search(query){
-    let self = this;
+    // let self = this;
     return new Promise((resolve,reject) => {
-      let airlines = self.airlines();
+      let airlines = LocomoteAPIRequester.airlines();
       airlines
       .then(airlines => {
         let requests = map(airlines,function(value){
               return new Promise((resolve)=>{
                 let airline_code = value.code;
-                resolve(self.flight_search(airline_code,query));
+                resolve(LocomoteAPIRequester.flight_search(airline_code,query));
               });
           });
         Promise.all(requests)

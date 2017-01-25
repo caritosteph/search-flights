@@ -10,7 +10,7 @@ export default {
     extensions: ['', '.js']
   },
   debug: true,
-  devtool: 'source-map',@
+  devtool: 'source-map',
   noInfo: true,
   entry: path.resolve(__dirname, 'client/src/index'),
   output: {
