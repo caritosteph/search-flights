@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Locomote - Node Test</title>
+</head>
+<body>
+
+  <div id="redoverlay" style="display:none;"></div>
+  <div id="loading" style="display:none">
+    <div id="message-loader">Please wait ...</div>
+    <div id="loader"></div>
+  </div>
+
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top topbar">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#search" id="logo">
+            <img src="assets/images/air_flights.jpg" alt="AirFlights">
+          </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right navbar-items" id="nav-search">
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="search">
+    <div class="container">
+      <div class="row">
+        <div class="alert alert-danger" style="display:none" id="myAlert">
+            <strong></strong>
+        </div>
+        <div class="title">
+          <h2 class="text-center">Search Flights</h2>
+        </div>
+        <form class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3" id="search-flight">
+          <div class="form-group">
+            <label for="from">Departure City</label>
+            <input type="text" name="from" class="form-control" autofocus placeholder="e.g. Sydney" required>
+          </div>
+          <div class="form-group">
+            <label for="to">Destination City</label>
+            <input type="text" name="to" class="form-control" placeholder="e.g. Heathrow" required>
+          </div>
+          <div class="form-group" id="travel-date">
+            <label for="to">When do you plan on travelling?</label>
+            <input type="text" name="date" class="form-control" placeholder="e.g. 2016-09-02" required>
+          </div>
+          <button type="submit" name="search" class="btn btn-primary">Search</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-flights">
+    <div class="container">
+      <div class="row">
+        <ul id="tabs" class="nav nav-tabs nav-justified nav-fixed" style="display:none">
+        </ul>
+        <div class="tab-content" style="display:none">
+          <h3 class="text-center" id="airline-title" style="display:none;">Flights per airlines</h3>
+          <div id="flights">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2017 Carolyn Ulfe</p>
+    </div>
+  </footer>
+
+</body>
+</html>

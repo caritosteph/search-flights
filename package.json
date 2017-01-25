@@ -4,13 +4,13 @@
   "description": "Locomote - Node Test",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel open:src open:back lint:watch",
-    "open:src": "babel-node tools/srcServer.js",
-    "open:back": "babel-node tools/backServer.js",
+    "start": "npm-run-all --parallel open:src lint:watch",
+    "open:src": "babel-node client/tools/srcServer.js",
+    "open:back": "babel-node server/server.js",
     "clean-dist": "rimraf ./dist && mkdir dist",
-    "open:dist": "babel-node tools/distServer.js",
-    "build": "npm run clean-dist && babel-node tools/build.js && npm run open:dist",
-    "lint": "esw webpack.config.* src tools --color",
+    "open:dist": "babel-node client/tools/distServer.js",
+    "build": "npm run clean-dist && babel-node client/tools/build.js && npm run open:dist",
+    "lint": "esw webpack.config.* src client/tools --color",
     "lint:watch": "npm run lint -- --watch"
   },
   "repository": {
@@ -21,7 +21,10 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "jquery": "^3.1.1"
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.17.1"
   },
   "devDependencies": {
     "babel-cli": "6.18.0",
@@ -30,9 +33,12 @@
     "babel-loader": "6.2.10",
     "babel-preset-latest": "6.16.0",
     "babel-preset-stage-1": "6.16.0",
+    "babel-register": "^6.18.0",
+    "bootstrap-datepicker": "^1.6.4",
     "browser-sync": "2.18.5",
     "cross-env": "3.1.3",
     "css-loader": "0.26.1",
+    "es6-promise": "^4.0.5",
     "eslint": "3.12.2",
     "eslint-plugin-import": "2.2.0",
     "eslint-watch": "2.1.14",
@@ -40,6 +46,7 @@
     "file-loader": "0.9.0",
     "html-webpack-plugin": "2.24.1",
     "npm-run-all": "3.1.2",
+    "request": "^2.79.0",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
