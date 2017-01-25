@@ -1,7 +1,7 @@
 @import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../../../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 
-body,html {
+body, html {
   height: 100%;
 }
 
@@ -47,7 +47,6 @@ body,html {
 /*
  * Form styles
  */
-
 #search {
   padding-top: 130px;
 }
@@ -123,7 +122,7 @@ label {
     height: 100%;
     z-index: 1;
 }
-.alert-danger{
+.alert-danger {
   height: 50px;
   width: 300px;
   position: absolute;
@@ -135,6 +134,7 @@ label {
   background-color: #b63a13;
   color: #fff;
 }
+
 /*
  * Tabs styles
  */
@@ -211,11 +211,10 @@ label {
   color: #fff;
   text-align: center;
 }
+
 /*
  * Media query
  */
-
-
 @media (max-width: 768px) {
   .cities,
   .duration {
@@ -239,9 +238,8 @@ label {
   .duration > h2{
     font-size: 20px;
   }
-  .list-body{
+  .list-body {
     font-size: 11px;
     height: 65px;
   }
-
 }

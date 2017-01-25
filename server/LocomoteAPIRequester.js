@@ -35,7 +35,6 @@ class LocomoteAPIRequester {
   }
 
   static search(query){
-    // let self = this;
     return new Promise((resolve,reject) => {
       let airlines = LocomoteAPIRequester.airlines();
       airlines

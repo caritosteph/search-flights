@@ -105,10 +105,10 @@ function generate_tabs_nearby_dates(params){
 $('#tabs').on('click','li.nearby_dates:not(.active)',function(e){
   loading();
   let date = e.target.innerText;
-  let params = $('#'+date).data('params');
+  let params = $('#' + date).data('params');
   params.date = date;
   $('#tabs li').removeClass('active');
-  $('#'+date).addClass('active');
+  $('#' + date).addClass('active');
   $('#flights').empty();
   $('#search-again').remove();
   $('#search').hide();
@@ -134,18 +134,18 @@ function generate_flights(airlines){
     }).text(airline.flights[0].airline.name)));
 
     forEach(airline.flights, (flight) => {
-      $('#'+flight.airline.code)
+      $('#' + flight.airline.code)
       .append($('<div/>',{
         class: 'list-body'
       }).append($('<div/>',{
         class: 'col-md-6 col-xs-6'
-      }).append($('<p/>').text('Flight Number: '+flight.flightNum))
-        .append($('<p/>').text(moment.parseZone(flight.start.dateTime).format('hh:mm a')+' - '+moment.parseZone(flight.finish.dateTime).format('hh:mm a'))))
+      }).append($('<p/>').text('Flight Number: ' + flight.flightNum))
+        .append($('<p/>').text(moment.parseZone(flight.start.dateTime).format('hh:mm a') + ' - ' + moment.parseZone(flight.finish.dateTime).format('hh:mm a'))))
         .append($('<div/>',{
           class: 'col-md-6 col-xs-6'
         })
         .append($('<p/>').text(flight.plane.shortName))
-        .append($('<p/>').text('Price: $AUD '+flight.price))));
+        .append($('<p/>').text('Price: $AUD ' + flight.price))));
     });
   });
 
@@ -170,8 +170,6 @@ function navbar_search(){
 
 $('#logo').click(function(){
   clean_form();
-
-
   $('#search').show();
   $('#tabs').empty();
   $('#flights').empty();
@@ -188,15 +186,15 @@ function cities_duration(airlines){
     class: 'col-md-12 cities-duration'
   }).append($('<div/>',{
     class: 'col-md-6 col-sm-6 cities'
-  }).append($('<h2/>').text(start_city+' - '+finish_city)))
+  }).append($('<h2/>').text(start_city + ' - ' + finish_city)))
   .append($('<div/>',{
     class: 'col-md-6 col-sm-6 duration'
-  }).append($('<h2/>').text('Flight Time: '+duration))));
+  }).append($('<h2/>').text('Flight Time: ' + duration))));
 }
 function min_to_hours(duration){
   let hours = Math.floor(duration/60);
   let minutes = duration%60;
-  return hours+'h '+minutes+'m';
+  return hours + 'h ' + minutes + 'm';
 }
 function clean_form(){
   $('#search-flight').trigger("reset");
