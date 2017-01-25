@@ -204,7 +204,7 @@ function clean_form(){
 
 function show_alert(message){
   $('#myAlert strong').text(message);
-  $("#myAlert").slideDown(2000, function(){
+  $("#myAlert").slideDown(3000, function(){
     $(this).hide();
   });
   $("#myAlert").slideUp(3000, function(){
