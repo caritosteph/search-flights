@@ -4,7 +4,7 @@
   "description": "Locomote - Node Test",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel open:src lint:watch",
+    "start": "npm-run-all --parallel open:src open:back lint:watch",
     "open:src": "babel-node client/tools/srcServer.js",
     "open:back": "babel-node server/server.js",
     "clean-dist": "rimraf ./dist && mkdir dist",
