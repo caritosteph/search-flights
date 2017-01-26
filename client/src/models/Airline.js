@@ -4,10 +4,10 @@ class Airline {
     this.flights = data.flights;
   }
 
-	get_airline_code() {
+  get_airline_code() {
     return this.airline_code;
   }
-	get_flights() {
+  get_flights() {
     return this.flights;
   }
 }

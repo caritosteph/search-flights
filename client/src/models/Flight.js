@@ -15,10 +15,10 @@ class Flight {
   get_airline_name() {
     return this.flight_number;
   }
-	get_flight_number() {
+  get_flight_number() {
     return this.flight_number;
   }
-	get_plane_name() {
+  get_plane_name() {
     return this.plane_name;
   }
   get_departure_city() {
@@ -33,7 +33,7 @@ class Flight {
   get_start_time() {
     return this.start_time;
   }
-	get_finish_time() {
+  get_finish_time() {
     return this.finish_time;
   }
   get_price() {
