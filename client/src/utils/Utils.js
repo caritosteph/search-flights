@@ -18,11 +18,11 @@ class Utils {
   }
 
   static message_error(message) {
-    $('#myAlert strong').text(message);
-    $("#myAlert").slideDown(3000, function(){
-      $(this).hide();
+    $('.myAlert strong').text(message);
+    $(".myAlert").slideDown(3000, function(){
+      $(this).show();
     });
-    $("#myAlert").slideUp(3000, function(){
+    $(".myAlert").slideUp(3000, function(){
       $(this).hide();
     });
   }

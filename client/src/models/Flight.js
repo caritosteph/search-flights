@@ -1,6 +1,7 @@
 class Flight {
 
   constructor(data) {
+    this.airline_name = data.airline.name;
     this.flight_number = data.flightNum;
     this.plane_name = data.plane.shortName;
     this.departure_city = data.start.cityName;
@@ -11,6 +12,9 @@ class Flight {
     this.price = data.price;
   }
 
+  get_airline_name() {
+    return this.flight_number;
+  }
 	get_flight_number() {
     return this.flight_number;
   }
