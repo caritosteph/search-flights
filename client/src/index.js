@@ -1,6 +1,5 @@
 "use strict";
 
-import './assets/styles/main.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.min';
 import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
 import map from 'lodash/map';
