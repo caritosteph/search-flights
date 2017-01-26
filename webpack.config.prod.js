@@ -2,6 +2,7 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 
@@ -26,7 +27,6 @@ export default {
       'Promise': 'es6-promise'
     }),
     new WebpackMd5Hash(), // Using md5 to change names.
-
     new webpack.optimize.OccurenceOrderPlugin(),
 
     new webpack.DefinePlugin({
@@ -34,8 +34,7 @@ export default {
       __DEV__: false
     }),
 
-    new ExtractTextPlugin('[name].[contenthash].css'),
-
+    new ExtractTextPlugin('assets/styles/[name].[chunkhash].css'),
     new HtmlWebpackPlugin({
       template: 'client/src/index.html',
       minify: {
@@ -55,16 +54,32 @@ export default {
 
     new webpack.optimize.DedupePlugin(),
 
-    new webpack.optimize.UglifyJsPlugin() 
+    new webpack.optimize.UglifyJsPlugin(),
+    new CopyWebpackPlugin([{
+      from: 'client/src/assets/images',
+      to: 'assets/images'
+    },{
+      from: 'client/src/assets/styles/main.css',
+      to: 'assets/styles'
+    },{
+      from: 'client/src/assets/styles/bootstrap.min.css',
+      to: 'assets/styles'
+    },{
+      from: 'client/src/assets/js/jquery-3.1.1.min.js',
+      to: 'assets/js'
+    },{
+      from: 'client/src/assets/js/bootstrap.min.js',
+      to: 'assets/js'
+    }]),
   ],
   module: {
     loaders: [
       {test: /\.js?$/, exclude: /node_modules/, loader: 'babel'},
-      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'url?public/fonts/name=[name].[ext]'},
-      {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&mimetype=application/font-woff&name=public/fonts/[name].[ext]'},
-      {test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]'},
-      {test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=public/images/[name].[ext]'},
+      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'url?public/fonts/name=assets/fonts/[name].[ext]'},
+      {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]'},
+      {test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream&name=assets/fonts/[name].[ext]'},
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml&name=assets/images/[name].[ext]'},
+      {test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=assets/images/[name].[ext]'},
       {test: /(\.css)$/, loader: ExtractTextPlugin.extract('css?sourceMap')},
     ]
   }
