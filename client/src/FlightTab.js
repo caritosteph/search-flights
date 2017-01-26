@@ -9,7 +9,7 @@ import Airline from './models/Airline';
 class FlightTab {
 
   static generate_tabs_nearby_dates(params) {
-    let nearby_dates = Utils.generate_dates();
+    let nearby_dates = Utils.generate_dates(params.date);
     forEach(nearby_dates, (date) => {
       $('#tabs').append($('<li/>',{
         id: date,
