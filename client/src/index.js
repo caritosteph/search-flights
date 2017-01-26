@@ -1,10 +1,11 @@
 "use strict";
-
-import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
 import map from 'lodash/map';
 import Utils from './utils/Utils';
 import FlightTab from './FlightTab';
 import Search from './Search';
+import '../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
+import '../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
+
 
 $('#travel-date input').datepicker({
     format: 'yyyy-mm-dd',

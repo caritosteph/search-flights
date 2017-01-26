@@ -34,7 +34,7 @@ export default {
       __DEV__: false
     }),
 
-    new ExtractTextPlugin('[name].[contenthash].css'),  // Generate an external css file with a hash in the filename.
+    new ExtractTextPlugin('[name].[contenthash].css'),
 
     new HtmlWebpackPlugin({
       template: 'client/src/index.html',
@@ -53,9 +53,9 @@ export default {
       inject: true
     }),
 
-    new webpack.optimize.DedupePlugin(), // Eliminate duplicate packages in the bundle
+    new webpack.optimize.DedupePlugin(),
 
-    new webpack.optimize.UglifyJsPlugin() // Minify js files
+    new webpack.optimize.UglifyJsPlugin() 
   ],
   module: {
     loaders: [
