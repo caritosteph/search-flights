@@ -4,7 +4,7 @@ a result show all the flights by airline in the same day and  nearby dates (+/- 
 
 >Example: 2016-09-08, 2016-09-09, 2016-09-10, 2016-09-11, 2016-09-12
 
-##Technologies
+## Technologies
 * Jquery
 * ES6
 * NodeJS
@@ -12,7 +12,7 @@ a result show all the flights by airline in the same day and  nearby dates (+/- 
 * Bootstrap
 * HTML & CSS
 
-##Installation
+## Installation
 ```
 git clone https://github.com/caritosteph/Search_Flights.git
 bash start.sh
